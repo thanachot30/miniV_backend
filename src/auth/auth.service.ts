@@ -30,6 +30,14 @@ export class AuthService {
       //userID: username,
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
+      authenticatorSelection: {
+        // Defaults
+        requireResidentKey: true,
+        residentKey: 'required',
+        userVerification: 'required',
+        // Optional
+        authenticatorAttachment: 'platform',
+      },
     });
 
     this.userDB[username] = { username }; // Store user
@@ -76,6 +84,7 @@ export class AuthService {
           transports: user.credential.transports, // Optional: Specify transports
         },
       ],
+      userVerification: 'required',
     });
 
     this.expectedChallenges[username] = options.challenge;
