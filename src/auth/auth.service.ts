@@ -38,6 +38,7 @@ export class AuthService {
         // Optional
         authenticatorAttachment: 'platform',
       },
+      preferredAuthenticatorType: 'localDevice',
     });
 
     this.userDB[username] = { username }; // Store user
