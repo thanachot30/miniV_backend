@@ -31,14 +31,11 @@ export class AuthService {
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
       authenticatorSelection: {
-        // Defaults
-        requireResidentKey: true,
-        residentKey: 'required',
+        requireResidentKey: false,
+        residentKey: 'discouraged',
         userVerification: 'required',
-        // Optional
         authenticatorAttachment: 'platform',
       },
-      preferredAuthenticatorType: 'localDevice',
     });
 
     this.userDB[username] = { username }; // Store user
