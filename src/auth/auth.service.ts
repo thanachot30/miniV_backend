@@ -31,7 +31,7 @@ export class AuthService {
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
       authenticatorSelection: {
-        requireResidentKey: false,
+        //requireResidentKey: false,
         residentKey: 'discouraged',
         userVerification: 'required',
         authenticatorAttachment: 'platform',
