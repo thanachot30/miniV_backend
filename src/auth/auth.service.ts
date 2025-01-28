@@ -32,7 +32,7 @@ export class AuthService {
       supportedAlgorithmIDs: [-7, -257],
       authenticatorSelection: {
         //requireResidentKey: false,
-        residentKey: 'preferred',
+        residentKey: 'discouraged',
         userVerification: 'required',
         authenticatorAttachment: 'platform',
       },
