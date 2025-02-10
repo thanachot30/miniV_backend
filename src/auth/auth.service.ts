@@ -31,12 +31,13 @@ export class AuthService {
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
       authenticatorSelection: {
-        //requireResidentKey: false,
-        // residentKey: 'discouraged',
-        residentKey: 'preferred',
+        //requireResidentKey: true,
+        residentKey: 'discouraged',
+        //residentKey: 'preferred',
         userVerification: 'required',
         authenticatorAttachment: 'platform',
       },
+      preferredAuthenticatorType: 'localDevice',
     });
 
     this.userDB[username] = { username }; // Store user
@@ -53,6 +54,8 @@ export class AuthService {
     response: RegistrationResponseJSON,
   ) {
     const expectedChallenge = this.expectedChallenges[username];
+    console.log(response);
+
     const { verified, registrationInfo } = await verifyRegistrationResponse({
       response,
       expectedChallenge,
@@ -98,7 +101,7 @@ export class AuthService {
     const user = this.userDB[username];
     const expectedChallenge = this.expectedChallenges[username];
 
-    //console.log('user.credential', user.credential.credential);
+    console.log('user.credential', user.credential.credential);
 
     const { verified } = await verifyAuthenticationResponse({
       response: credential,
