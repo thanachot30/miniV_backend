@@ -27,17 +27,15 @@ export class AuthService {
     const options = await generateRegistrationOptions({
       rpName: process.env.RP_NAME,
       rpID: process.env.RP_ID,
-      //userID: username,
+      // userID: username,
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
       authenticatorSelection: {
-        //requireResidentKey: true,
+        requireResidentKey: true,
         residentKey: 'discouraged',
-        //residentKey: 'preferred',
-        userVerification: 'required',
+        userVerification: 'preferred',
         authenticatorAttachment: 'platform',
       },
-      preferredAuthenticatorType: 'localDevice',
     });
 
     this.userDB[username] = { username }; // Store user
