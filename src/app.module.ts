@@ -7,7 +7,11 @@ import { ConfigModule } from '@nestjs/config';
 import { WebsocketGateway } from './websocket/websocket/websocket.gateway';
 import { CallbackController } from './callback/callback/callback.controller';
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
   controllers: [AppController, AuthController, CallbackController],
   providers: [AppService, AuthService, WebsocketGateway],
 })
