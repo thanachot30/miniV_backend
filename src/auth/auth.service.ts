@@ -84,9 +84,9 @@ export class AuthService {
         transports: cred.transports,
       })),
       authenticatorSelection: {
-        residentKey: 'discouraged',
+        residentKey: 'preferred',
         authenticatorAttachment: 'platform',
-        userVerification: 'discouraged',
+        userVerification: 'required',
       },
     });
     //console.log('options', options);
@@ -160,7 +160,7 @@ export class AuthService {
     const options = await generateAuthenticationOptions({
       timeout: 60000,
       rpID: process.env.RP_ID,
-      userVerification: 'discouraged',
+      userVerification: 'required',
       allowCredentials: user.credentials.map((cred) => ({
         id: cred.id,
         type: 'public-key',
