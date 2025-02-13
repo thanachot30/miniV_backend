@@ -165,7 +165,7 @@ export class AuthService {
       allowCredentials: user.credentials.map((cred) => ({
         id: cred.id,
         type: 'public-key',
-        transports: ['internal'],
+        transports: cred.transports,
       })),
     });
 
@@ -210,7 +210,7 @@ export class AuthService {
         expectedOrigin: this.rp_origin,
         expectedRPID: this.rp_id,
         credential: dbCredential,
-        requireUserVerification: true,
+        requireUserVerification: false,
       });
     } catch (error) {
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
