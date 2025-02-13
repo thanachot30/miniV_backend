@@ -71,6 +71,7 @@ export class AuthService {
 
     //console.log(this.rp_name, this.rp_origin);
     const options = await generateRegistrationOptions({
+      userDisplayName: `${username}Display`,
       rpName: this.rp_name,
       rpID: this.rp_id,
       // userID: username,
@@ -164,7 +165,7 @@ export class AuthService {
       allowCredentials: user.credentials.map((cred) => ({
         id: cred.id,
         type: 'public-key',
-        transports: cred.transports,
+        transports: ['internal'],
       })),
     });
 
@@ -209,7 +210,7 @@ export class AuthService {
         expectedOrigin: this.rp_origin,
         expectedRPID: this.rp_id,
         credential: dbCredential,
-        requireUserVerification: false,
+        requireUserVerification: true,
       });
     } catch (error) {
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
