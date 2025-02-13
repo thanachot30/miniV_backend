@@ -84,7 +84,7 @@ export class AuthService {
         transports: cred.transports,
       })),
       authenticatorSelection: {
-        residentKey: 'preferred',
+        residentKey: 'required',
         authenticatorAttachment: 'platform',
         userVerification: 'required',
       },
