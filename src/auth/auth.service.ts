@@ -90,8 +90,6 @@ export class AuthService {
         userVerification: 'required',
       },
     });
-    //console.log('options', options);
-
     this.expectedChallenges[username] = options.challenge;
     // user.expectedChallenge = options.challenge;
     // console.log("Stored challenge:", user.expectedChallenge);
@@ -120,6 +118,7 @@ export class AuthService {
       throw error(`${error}`);
     }
     // console.log('verification', verification);
+    console.log('verification registrationInfo', verification.registrationInfo);
 
     const { verified, registrationInfo } = verification;
 
@@ -215,6 +214,11 @@ export class AuthService {
     } catch (error) {
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
     }
+
+    console.log(
+      'verification authenticationInfo:',
+      verification.authenticationInfo,
+    );
 
     const { verified, authenticationInfo } = verification;
     // console.log('verified', verified, authenticationInfo);
