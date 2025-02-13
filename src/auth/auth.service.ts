@@ -210,7 +210,7 @@ export class AuthService {
         expectedOrigin: this.rp_origin,
         expectedRPID: this.rp_id,
         credential: dbCredential,
-        requireUserVerification: false,
+        requireUserVerification: true,
       });
     } catch (error) {
       throw new HttpException({ error: error.message }, HttpStatus.BAD_REQUEST);
