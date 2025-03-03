@@ -25,7 +25,7 @@ export interface GetUserResponse {
 //   username: string;
 //   credentials?: any;
 // }
-interface LoggedInUser {
+export interface LoggedInUser {
   id: string;
   username: string;
   credentials: WebAuthnCredential[];
@@ -232,10 +232,8 @@ export class AuthService {
     };
   }
 
-  GetUser(): GetUserResponse {
-    return {
-      user: this.userDB,
-      Challenges: this.expectedChallenges,
-    };
+  GetUser() {
+    const allUser = this.inMemoryUserDB;
+    return allUser;
   }
 }

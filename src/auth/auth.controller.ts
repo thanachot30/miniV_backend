@@ -112,7 +112,7 @@ export class AuthController {
   }
 
   @Get('user')
-  user() {
+  listUser() {
     return this.authService.GetUser();
   }
 }
