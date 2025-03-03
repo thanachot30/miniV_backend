@@ -41,6 +41,7 @@ export class AuthService {
   private rp_id = this.configService.get<string>('RP_ID');
   private rp_name = this.configService.get<string>('RP_NAME');
   private rp_origin = this.configService.get<string>('RP_ORIGIN');
+
   private inMemoryUserDB: { [loggedInUserId: string]: LoggedInUser } = {
     [loggedInUserId]: {
       id: loggedInUserId,
@@ -75,7 +76,7 @@ export class AuthService {
       rpName: this.rp_name,
       rpID: this.rp_id,
       // userID: username,
-      timeout: 60000,
+      timeout: 10000,
       attestationType: 'none',
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
@@ -152,6 +153,7 @@ export class AuthService {
   //..........Authentication................
   async generateAuthenticationOptions(_username: string) {
     const user = this.inMemoryUserDB[_username];
+    console.log('all user', this.inMemoryUserDB);
 
     if (!user) {
       throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
