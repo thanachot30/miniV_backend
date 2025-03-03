@@ -22,11 +22,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() body: { username: string }): Promise<authProp> {
-    console.log('username', body.username);
+  async register(@Body() body: { wallet_user_id: string }): Promise<authProp> {
+    console.log('username', body.wallet_user_id);
     try {
       const _data = await this.authService.generateRegistrationOptions(
-        body.username,
+        body.wallet_user_id,
       );
       return {
         response: result.success,
@@ -45,11 +45,11 @@ export class AuthController {
 
   @Post('register/verify')
   async verifyRegistration(
-    @Body() body: { username: string; credential: any },
+    @Body() body: { wallet_user_id: string; credential: any },
   ) {
     try {
       const _data = await this.authService.verifyRegistration(
-        body.username,
+        body.wallet_user_id,
         body.credential,
       );
       return {
@@ -68,11 +68,11 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() body: { username: string }) {
-    console.log(body.username);
+  async login(@Body() body: { wallet_user_id: string }) {
+    console.log(body.wallet_user_id);
     try {
       const _data = await this.authService.generateAuthenticationOptions(
-        body.username,
+        body.wallet_user_id,
       );
       return {
         response: result.success,
@@ -90,10 +90,10 @@ export class AuthController {
   }
 
   @Post('login/verify')
-  async verifyLogin(@Body() body: { username: string; credential: any }) {
+  async verifyLogin(@Body() body: { wallet_user_id: string; credential: any }) {
     try {
       const _data = await this.authService.verifyAuthentication(
-        body.username,
+        body.wallet_user_id,
         body.credential,
       );
       return {

@@ -50,20 +50,25 @@ export class AuthService {
     },
   };
   //...........Registration.........
-  async generateRegistrationOptions(_username?: string) {
-    if (!_username) {
-      throw new HttpException('Username is required', HttpStatus.BAD_REQUEST);
+  async generateRegistrationOptions(wallet_user_id: string) {
+    if (!wallet_user_id) {
+      throw new HttpException(
+        'wallet_user_id is required',
+        HttpStatus.BAD_REQUEST,
+      );
     }
 
-    let user = this.inMemoryUserDB[_username];
+    let user = this.inMemoryUserDB[wallet_user_id];
+
+    console.log('user', user);
 
     if (!user) {
       user = {
-        id: _username,
-        username: _username,
+        id: wallet_user_id,
+        username: wallet_user_id,
         credentials: [],
       };
-      this.inMemoryUserDB[_username] = user;
+      this.inMemoryUserDB[wallet_user_id] = user;
     }
 
     //console.log('user', user);
@@ -72,7 +77,7 @@ export class AuthService {
 
     //console.log(this.rp_name, this.rp_origin);
     const options = await generateRegistrationOptions({
-      userDisplayName: `${username}Display`,
+      userDisplayName: `display name: ${username}`,
       rpName: this.rp_name,
       rpID: this.rp_id,
       // userID: username,
@@ -97,8 +102,11 @@ export class AuthService {
     return options;
   }
 
-  async verifyRegistration(_username: string, body: RegistrationResponseJSON) {
-    const user = this.inMemoryUserDB[_username];
+  async verifyRegistration(
+    wallet_user_id: string,
+    body: RegistrationResponseJSON,
+  ) {
+    const user = this.inMemoryUserDB[wallet_user_id];
     if (!user) {
       throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
     }
@@ -151,8 +159,8 @@ export class AuthService {
   }
 
   //..........Authentication................
-  async generateAuthenticationOptions(_username: string) {
-    const user = this.inMemoryUserDB[_username];
+  async generateAuthenticationOptions(wallet_user_id: string) {
+    const user = this.inMemoryUserDB[wallet_user_id];
     console.log('all user', this.inMemoryUserDB);
 
     if (!user) {
@@ -177,10 +185,10 @@ export class AuthService {
   }
 
   async verifyAuthentication(
-    _username: string,
+    wallet_user_id: string,
     body: AuthenticationResponseJSON,
   ) {
-    const user = this.inMemoryUserDB[_username];
+    const user = this.inMemoryUserDB[wallet_user_id];
 
     if (!user) {
       throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
