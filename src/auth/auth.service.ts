@@ -85,11 +85,12 @@ export class AuthService {
       attestationType: 'none',
       userName: username,
       supportedAlgorithmIDs: [-7, -257],
-      excludeCredentials: credentials.map((cred) => ({
-        id: cred.id,
-        type: 'public-key',
-        transports: cred.transports,
-      })),
+      // excludeCredentials: credentials.map((cred) => ({
+      //   id: cred.id,
+      //   type: 'public-key',
+      //   transports: cred.transports,
+      // })),
+      excludeCredentials: [],
       authenticatorSelection: {
         residentKey: 'required',
         authenticatorAttachment: 'platform',
