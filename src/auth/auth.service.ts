@@ -109,7 +109,10 @@ export class AuthService {
   ) {
     const user = this.inMemoryUserDB[wallet_user_id];
     if (!user) {
-      throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Passkey not found',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
     const { username, credentials } = user;
     //console.log('expectedChallenges', this.expectedChallenges[username]);
@@ -165,7 +168,10 @@ export class AuthService {
     console.log('all user', this.inMemoryUserDB);
 
     if (!user) {
-      throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Passkey not found',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
     const { username } = user;
     const options = await generateAuthenticationOptions({
@@ -192,7 +198,10 @@ export class AuthService {
     const user = this.inMemoryUserDB[wallet_user_id];
 
     if (!user) {
-      throw new HttpException('user not found', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Passkey not found',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
     const { username } = user;
     const expectedChallenge = this.expectedChallenges[username];
@@ -208,7 +217,7 @@ export class AuthService {
     if (!dbCredential) {
       throw new HttpException(
         'Authenticator is not registered with this site',
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
 
